@@ -8,10 +8,6 @@ from setuptools.command.test import test as TestCommand
 
 import health_check_plus
 
-with open('requirements.txt', 'r') as f:
-    requires = f.read().splitlines()
-
-
 class Tox(TestCommand):
     user_options = [('tox-args=', 'a', "Arguments to pass to tox")]
 
@@ -43,7 +39,7 @@ setup(
         'health_check_plus',
     ],
     include_package_data=True,
-    install_requires=requires,
+    install_requires=['django-health-check==1.0.2', 'tox'],
     license=health_check_plus.__license__,
     zip_safe=False,
     keywords='python, django, health, check, network, service',

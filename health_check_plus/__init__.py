@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 __license__ = 'GPLv3'
 
 __author__ = 'Miguel Angel Moreno'

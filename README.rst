@@ -2,7 +2,7 @@
 Django Health Check Plus
 ========================
 
-:Version: 0.1.0
+:Version: 0.1.1
 :Status: beta
 :Author: Miguel Angel Moreno
 
@@ -10,10 +10,6 @@ Django package to improve usage of django-health-check library.
 
 Install
 =======
-
-Install python requirements::
-
-    pip install -r requirements.txt
 
 Install package::
 
