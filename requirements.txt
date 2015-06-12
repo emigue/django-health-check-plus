@@ -1,0 +1,2 @@
+django-health-check==1.0.2
+tox

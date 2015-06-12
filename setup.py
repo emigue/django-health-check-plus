@@ -1,0 +1,64 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import sys
+
+from setuptools import setup
+from setuptools.command.test import test as TestCommand
+
+import health_check_plus
+
+with open('requirements.txt', 'r') as f:
+    requires = f.read().splitlines()
+
+
+class Tox(TestCommand):
+    user_options = [('tox-args=', 'a', "Arguments to pass to tox")]
+
+    def initialize_options(self):
+        TestCommand.initialize_options(self)
+        self.tox_args = ''
+
+    def finalize_options(self):
+        TestCommand.finalize_options(self)
+        self.test_args = []
+        self.test_suite = True
+
+    def run_tests(self):
+        import tox
+        import shlex
+        errno = tox.cmdline(args=shlex.split(self.tox_args))
+        sys.exit(errno)
+
+
+setup(
+    name='django-health-check-plus',
+    version=health_check_plus.__version__,
+    description=health_check_plus.__description__,
+    long_description='\n'.join([open('README.rst').read(), open('CHANGELOG').read()]),
+    author=health_check_plus.__author__,
+    author_email=health_check_plus.__email__,
+    url=health_check_plus.__url__,
+    packages=[
+        'health_check_plus',
+    ],
+    include_package_data=True,
+    install_requires=requires,
+    license=health_check_plus.__license__,
+    zip_safe=False,
+    keywords='python, django, health, check, network, service',
+    classifiers=[
+        'Development Status :: 4 - Beta',
+        'Framework :: Django',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+        'Natural Language :: English',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.6',
+        'Programming Language :: Python :: 2.7',
+        'Topic :: Software Development :: Libraries :: Python Modules',
+    ],
+    test_suite='tests',
+    tests_require=['tox'],
+    cmdclass={'test': Tox},
+)
