@@ -55,7 +55,7 @@ Example::
         'storage': 'DefaultFileStorageHealthCheck'
     }
 
-Include in urls.py the next line::
+Include the next line in urlpatterns variable in urls.py::
 
     url(r'^status/', include('health_check_plus.urls')),
 
