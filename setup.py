@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import os
 import sys
 
 from setuptools import setup
@@ -27,11 +28,14 @@ class Tox(TestCommand):
         sys.exit(errno)
 
 
+def read(fname):
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
+
 setup(
     name='django-health-check-plus',
     version=health_check_plus.__version__,
     description=health_check_plus.__description__,
-    long_description='\n'.join([open('README.rst').read(), open('CHANGELOG').read()]),
+    long_description='\n'.join([read('README.rst'), read('CHANGELOG')]),
     author=health_check_plus.__author__,
     author_email=health_check_plus.__email__,
     url=health_check_plus.__url__,
