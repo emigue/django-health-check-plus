@@ -27,15 +27,11 @@ class Tox(TestCommand):
         errno = tox.cmdline(args=shlex.split(self.tox_args))
         sys.exit(errno)
 
-
-def read(fname):
-    return open(os.path.join(os.path.dirname(__file__), fname)).read()
-
 setup(
     name='django-health-check-plus',
     version=health_check_plus.__version__,
     description=health_check_plus.__description__,
-    long_description='\n'.join([read('README.rst'), read('CHANGELOG')]),
+    long_description='Django package to improve usage of django-health-check library.',
     author=health_check_plus.__author__,
     author_email=health_check_plus.__email__,
     url=health_check_plus.__url__,
