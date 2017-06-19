@@ -1,16 +1,25 @@
 import json
-import decimal
+
+import django
 from django.http import HttpResponse
 
+DJANGO_17_MINOR_VERSION = 7
 
-def decimal_default(obj):
-    if isinstance(obj, decimal.Decimal):
-        return float(obj)
-    return unicode(obj)
+if django.VERSION[1] == DJANGO_17_MINOR_VERSION:
+    from django.http import JsonResponse
+else:
+    from django.core.serializers.json import DjangoJSONEncoder
 
 
-class JsonResponse(HttpResponse):
+    class JsonResponse(HttpResponse):
+        def __init__(self, data, encoder=DjangoJSONEncoder, safe=True, **kwargs):
+            if safe and not isinstance(data, dict):
+                raise TypeError('In order to allow non-dict objects to be '
+                                'serialized set the safe parameter to False')
+            if 'mimetype' in kwargs:
+                raise TypeError('To keep code clean to Django 1.7 JsonResponse do '
+                                'not allow mimetype argument since 1.7 version')
 
-    def __init__(self, object, ensure_ascii=True, **kwargs):
-        content = json.dumps(object, ensure_ascii=ensure_ascii, default=decimal_default)
-        super(JsonResponse, self).__init__(content, mimetype='application/json', **kwargs)
+            kwargs.setdefault('content_type', 'application/json')
+            data = json.dumps(data, cls=encoder)
+            super(JsonResponse, self).__init__(content=data, **kwargs)

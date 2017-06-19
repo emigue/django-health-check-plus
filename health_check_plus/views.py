@@ -1,7 +1,9 @@
-from health_check_plus import settings
-from health_check_plus.utils import JsonResponse
 from health_check.plugins import plugin_dir
 from health_check.views import home
+
+from health_check_plus import settings
+from health_check_plus.utils import JsonResponse
+
 
 def main(request):
     format = request.GET.get('format', None)
@@ -10,8 +12,8 @@ def main(request):
     elif format == "json":
         return main_json(request)
 
-def main_json(request):
 
+def main_json(request):
     whitelist = set(settings.HEALTH_CHECK_PLUGINS.values())
 
     str_filter = request.GET.get('checks', None)
@@ -53,6 +55,6 @@ def main_json(request):
         raise Exception("Some check plugin configured but not loaded")
 
     if working:
-        return JsonResponse(plugins)
+        return JsonResponse(plugins, safe=False)
     else:
-        return JsonResponse(plugins, status=500)
+        return JsonResponse(plugins, status=500, safe=False)
