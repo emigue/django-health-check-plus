@@ -2,8 +2,7 @@
 Django Health Check Plus
 ========================
 
-:Version: 0.2.0
-:Status: beta
+:Version: 1.0.0
 :Author: Miguel Angel Moreno
 
 Django package to improve usage of django-health-check library.
@@ -23,7 +22,6 @@ Include in settings.py the next settings::
     INSTALLED_APPS = (
                         ...,
                         'health_check',
-                        'health_check_plus',
                         ...
                       )
 
@@ -40,19 +38,15 @@ Example::
     INSTALLED_APPS = (
                         ...
                         'health_check',
-                        'health_check_plus',
-                        'health_check_celery',
-                        'health_check_db',
-                        'health_check_cache',
-                        'health_check_storage',
+                        'health_check.celery',
+                        'health_check.db',
+                        'health_check.cache',
+                        'health_check.storage',
                         ...
                       )
 
     HEALTH_CHECK_PLUGINS = {
-        'db': 'DjangoDatabaseBackend',
-        'cache': 'CacheBackend',
-        'celery': 'CeleryHealthCheck',
-        'storage': 'DefaultFileStorageHealthCheck'
+        'happy': 'MyServiceIsHappyCheck',
     }
 
 Include the next line in urlpatterns variable in urls.py::
@@ -63,20 +57,47 @@ Include the next line in urlpatterns variable in urls.py::
 Add new check
 =============
 
-Create file in your project named plugin_health_check.py.
+riting a health check is quick and easy:
 
-Create check class inherited from BaseHealthCheckBackend::
+.. code:: python
 
-    from health_check.backends.base import BaseHealthCheckBackend
-    from health_check.plugins import plugin_dir
+    from health_check.backends import BaseHealthCheckBackend
 
-    class MyCheckBackend(BaseHealthCheckBackend):
-
+    class MyHealthCheckBackend(BaseHealthCheckBackend):
         def check_status(self):
+            # The test code goes here.
+            # You can use `self.add_error` or
+            # raise a `HealthCheckException`,
+            # similar to Django's form validation.
             pass
 
-    plugin_dir.register(MyCheckBackend)
+        def identifier(self):
+            return self.__class__.__name__  # Display name on the endpoint.
 
+After writing a custom checker, register it in your app configuration:
+
+.. code:: python
+
+    from django.apps import AppConfig
+
+    from health_check.plugins import plugin_dir
+
+    class MyAppConfig(AppConfig):
+        name = 'my_app'
+
+        def ready(self):
+            from .backends import MyHealthCheckBackend
+            plugin_dir.register(MyHealthCheckBackend)
+
+Make sure the application you write the checker into is registered in your ``INSTALLED_APPS``.
+
+Finally add your plugin class to ``HEALTH_CHECK_PLUGINS``:
+
+.. code:: python
+
+        HEALTH_CHECK_PLUGINS = {
+            'myhealthcheck': 'MyHealthCheckBackend',
+        }
 
 Usage
 =====

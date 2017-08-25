@@ -1,5 +1,10 @@
 Changes
 =======
+v1.0.0 - 11/08/2017
+* Upgrade to Django 1.11, python3 and `django-health-check` 2.3.0
+* [Breaking change] Removed old functionality and remove old Django version compatibility.
+
+
 v0.2.0 - 08/06/2017
 * JSonResponse Django native method will be used for 1.7 version
 * JSonResponse method encoder changed to DjangoJSONEncoder
