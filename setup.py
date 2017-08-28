@@ -1,23 +1,23 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os
 import sys
 
 from setuptools import setup
-from setuptools.command.test import test as TestCommand
+from setuptools.command.test import test as testCommand
 
 import health_check_plus
 
-class Tox(TestCommand):
+
+class Tox(testCommand):
     user_options = [('tox-args=', 'a', "Arguments to pass to tox")]
 
     def initialize_options(self):
-        TestCommand.initialize_options(self)
+        testCommand.initialize_options(self)
         self.tox_args = ''
 
     def finalize_options(self):
-        TestCommand.finalize_options(self)
+        testCommand.finalize_options(self)
         self.test_args = []
         self.test_suite = True
 
@@ -39,7 +39,7 @@ setup(
         'health_check_plus',
     ],
     include_package_data=True,
-    install_requires=['django-health-check==1.0.2', 'tox'],
+    install_requires=['django-health-check==2.3.0'],
     license=health_check_plus.__license__,
     zip_safe=False,
     keywords='python, django, health, check, network, service',
@@ -52,9 +52,11 @@ setup(
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.6',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
     test_suite='tests',
-    tests_require=['tox'],
+    tests_require=['tox', 'Django'],
     cmdclass={'test': Tox},
 )
