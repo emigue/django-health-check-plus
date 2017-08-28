@@ -1,5 +1,6 @@
 import copy
 
+from django.http import JsonResponse
 from health_check.views import MainView
 from health_check.plugins import plugin_dir
 
@@ -30,5 +31,13 @@ class StatusOptionalCheckView(MainView):
         return self.render_to_response({'plugins': plugins}, status=status_code)
 
     def _plugin_in_queryparams(self, request, plugin):
-        plugins_to_check = request.GET.get('checks', '').split(',')
-        return self.humanize_plugin_name.get(plugin.identifier()) in plugins_to_check
+        if 'checks' in request.GET:
+            plugins_to_check = request.GET.get('checks', '').split(',')
+            return self.humanize_plugin_name.get(plugin.identifier()) in plugins_to_check
+        return True
+
+
+class StatusCheckPingView(MainView):
+
+    def get(self, request, *args, **kwargs):
+        return JsonResponse({}, status=200)
