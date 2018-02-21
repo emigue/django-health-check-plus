@@ -1,0 +1,21 @@
+lanhuage: python
+sudo: false
+cache: pip
+python:
+ - '3.6'
+env:
+  matrix:
+  - TOXENV=qa
+  - DJANGO=111
+install:
+- pip install --upgrade tox
+
+before_script:
+- |
+  if [[ -z $TOXENV ]]; then
+    export TOXENV=py$(echo $TRAVIS_PYTHON_VERSION | sed -e 's/\.//g')-dj$DJANGO
+  fi
+- echo $TOXENV
+
+script:
+- tox -e $TOXENV
