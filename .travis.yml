@@ -2,19 +2,27 @@ language: python
 sudo: false
 cache: pip
 python:
- - '3.6'
+- '3.6'
 env:
   matrix:
   - DJANGO=111
 install:
 - pip install --upgrade tox
-
 before_script:
 - |
   if [[ -z $TOXENV ]]; then
     export TOXENV=py$(echo $TRAVIS_PYTHON_VERSION | sed -e 's/\.//g')-dj$DJANGO
   fi
 - echo $TOXENV
-
 script:
 - tox -e $TOXENV
+deploy:
+  provider: pypi
+  user: luispiedra
+  password:
+    secure: rZSgGTcgFTXOe1dZF/DVJ9UNDRf5Q8YYd9xHKRD5V0sjiVusN4xFqgYfZ09DgMtytr84fMBrfrmTlQoWtxTRtr2fictZ3SLWGtO/F6Pexd66N0xjEhDfJAgLDHsVzXOf3E7+AwdbJfQ5sQoK6odMAUkqViFfyVaizZLNfbwfUbn8wbCXN+xpmpJvW4hF6rKpyP2VcM+NnIkb8lETIIySfcRo7Oz4dUd2iNzfr8IbwA59krAJX/OmXj5ljMU8xQUbvunmt9l8e8UlK9YssI3iSrQFUfn1KrXV2TpstpUXuxQqOxiSFeW7/0znTAIyv61+ogNfa1ELmiHr+a3moUUWIHTJdI+PWkWmelxLgqT4ylOO9rDlUiub46qLppmgYgv5YLCuhAgHQcUHsg9INYe+PvboHR+dDU7e1yHvUL1PWD9q5BSxhuwLBlYZ/KV5AakjeVZ+chvkChz/5XT0Y5je7voOGsZnG9Nd8o2lDe8SRkkN7HNVyeFi3boiFl1unLNAn7gIyUA1pH23oCbujmh0rDq8iUUu1d6MBhCrfV7cySV99dccVo3T59FyywnUQfuyGEncy4fsAIa3+h2hcoH5UB3DMJVanagbyoK3tH+e/0/tVj1OuTzX7lO0+9QrI6mX/qv3YM3F3Rp41B/jfTEtJjP5toB2SVcyk50mK0USvlE=
+  on:
+    tags: true
+    distributions: sdist bdist_wheel
+    repo: LuisPiedra/django-health-check-plus
+    branch: master
