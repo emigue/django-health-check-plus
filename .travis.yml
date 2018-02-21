@@ -5,7 +5,6 @@ python:
  - '3.6'
 env:
   matrix:
-  - TOXENV=qa
   - DJANGO=111
 install:
 - pip install --upgrade tox
