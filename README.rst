@@ -2,7 +2,7 @@
 Django Health Check Plus
 ========================
 
-:Version: 1.0.0
+:Version: 1.0.1
 :Author: Miguel Angel Moreno
 
 Django package to improve usage of django-health-check library.
@@ -25,13 +25,7 @@ Include in settings.py the next settings::
                         ...
                       )
 
-Include the next variable in settings.py::
-
-    HEALTH_CHECK_PLUGINS = {
-        'name': 'plugin_identifier'
-    }
-
-Where name is set by user and plugin_identifier es the identifier given by health_check library for every plugin.
+Where name is set by user and plugin_identifier is the identifier given by health_check library for every plugin.
 
 Example::
 
@@ -45,10 +39,6 @@ Example::
                         ...
                       )
 
-    HEALTH_CHECK_PLUGINS = {
-        'happy': 'MyServiceIsHappyCheck',
-    }
-
 Include the next line in urlpatterns variable in urls.py::
 
     url(r'^status/', include('health_check_plus.urls')),
@@ -57,7 +47,7 @@ Include the next line in urlpatterns variable in urls.py::
 Add new check
 =============
 
-riting a health check is quick and easy:
+Writing a health check is quick and easy:
 
 .. code:: python
 
@@ -72,7 +62,9 @@ riting a health check is quick and easy:
             pass
 
         def identifier(self):
-            return self.__class__.__name__  # Display name on the endpoint.
+            # Might be overridden if you want to get a custom name, otherwise
+            # the checker class name will be used.
+            return self.__class__.__name__
 
 After writing a custom checker, register it in your app configuration:
 
@@ -90,14 +82,6 @@ After writing a custom checker, register it in your app configuration:
             plugin_dir.register(MyHealthCheckBackend)
 
 Make sure the application you write the checker into is registered in your ``INSTALLED_APPS``.
-
-Finally add your plugin class to ``HEALTH_CHECK_PLUGINS``:
-
-.. code:: python
-
-        HEALTH_CHECK_PLUGINS = {
-            'myhealthcheck': 'MyHealthCheckBackend',
-        }
 
 Usage
 =====
@@ -123,4 +107,4 @@ To show status of some checks (mycheck1 and mycheck2) in json format use::
 HTTP status code:
 
  * 200: If all queried checks are in status OK.
- * 500: If some queried check is WRONG.
+ * 500: If any queried check is WRONG.
