@@ -33,7 +33,7 @@ class StatusOptionalCheckView(MainView):
     def _plugin_in_queryparams(self, request, plugin):
         if 'checks' in request.GET:
             plugins_to_check = request.GET.get('checks', '').split(',')
-            return self.humanize_plugin_name.get(plugin.identifier()) in plugins_to_check
+            return self.humanize_plugin_name.get(plugin.identifier(), plugin.identifier()) in plugins_to_check
         return True
 
 
