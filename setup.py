@@ -39,7 +39,7 @@ setup(
         'health_check_plus',
     ],
     include_package_data=True,
-    install_requires=['django-health-check==2.3.0'],
+    install_requires=['django-health-check==3.16.4'],
     license=health_check_plus.__license__,
     zip_safe=False,
     keywords='python, django, health, check, network, service',

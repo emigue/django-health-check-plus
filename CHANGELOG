@@ -1,5 +1,8 @@
 Changes
 =======
+v2.0.0 - 13/05/2021
+* Update required `django-health-check` to v3.16.4 so it could support Django 3.
+
 v1.0.1 - 02/08/2018
 * Fix optional check view not detecting custom health checks.
 

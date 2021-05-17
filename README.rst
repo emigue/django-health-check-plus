@@ -2,7 +2,7 @@
 Django Health Check Plus
 ========================
 
-:Version: 1.0.1
+:Version: 2.0.0
 :Author: Miguel Angel Moreno
 
 Django package to improve usage of django-health-check library.
