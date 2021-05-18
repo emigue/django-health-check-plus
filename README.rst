@@ -7,6 +7,8 @@ Django Health Check Plus
 
 Django package to improve usage of django-health-check library.
 
+Use `django-health-check==3.16.3` if you'd like to install this library in Django 1.11 project. For Django 2 and 3 use `django-health-check==3.16.4`.
+
 Install
 =======
 
