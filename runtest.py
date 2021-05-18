@@ -6,6 +6,7 @@ from django.test.runner import DiscoverRunner
 
 settings.configure(
     DEBUG=True,
+    SECRET_KEY='secret_key',
     ROOT_URLCONF='health_check_plus.urls',
     INSTALLED_APPS=[
        'django.contrib.auth',
