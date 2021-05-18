@@ -6,6 +6,8 @@ python:
 env:
   matrix:
   - DJANGO=111
+  - DJANGO=22
+  - DJANGO=32
 install:
 - pip install --upgrade tox
 before_script:
