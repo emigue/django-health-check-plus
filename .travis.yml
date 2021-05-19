@@ -17,7 +17,7 @@ before_script:
 script:
 - tox -e $TOXENV
 deploy:
-  server: https://upload.pypi.org/legacy
+  server: https://upload.pypi.org/legacy/
   provider: pypi
   user: luispiedra
   password:
