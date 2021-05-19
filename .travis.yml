@@ -17,9 +17,8 @@ before_script:
 script:
 - tox -e $TOXENV
 deploy:
-  server: https://upload.pypi.org/legacy/
   provider: pypi
-  user: luispiedra
+  user: __token__
   password:
     secure: "E775kZosgTqpcPZv5LVRqTfs5duQ9miL9/Zh5GNkv2/VME3UF85QrhX/Ka7aoT8ll3MSw+dL40PcUiE0BVNNx0ZeW9yzHbhP49pEYeYNgC/7tObIAEFDI6MFIWr9zDfugx+XZvQht/ZMYoUsgvnObB5d5Qs2911kd3FIu2a8lGBcRxg63LBanVmS9fYN5meOlBuBLrfWgnleLZxc7WFex1N9Y0N6fbe8ssep7WEI7Br4s30IlSkjYBUv4IFbOtAyhGCzIAD72viA3v4HF4d1OVrM00Z+BsUnsk22gStxe8diod+srR+nwIv2PZAcSh1+pTH8+LCgVGqPgnB2GHXqvGYtGBgnCNr6uySHP4Ouss/j/6QjsjWTKsZYTfanxuB+wvNstdjJSmIYOv7rlpgU6PRXurn/Os8pepWdZKI+LLReBI49uXhB018NreZF1BGcwNSwtY0rmc1mWbh2hVazzQxhOTRiy2ThGQkSMTT05As+ozx3B0JVyPqAdBcsTMS0TvfjLjsIBAqceXRjE0u5GBYnzkRa+r818I0wsGXu6zPyv0M9JpKjQgRufKoHMpWRg6T8QfmIP+y89LIbQCZY5gNlFfqVmrNz5+gfulIa6aXyV/ymEfNT6Vk312kvSRDnuGUkRSvi/ARpSK03qavy+Zv5r/1IMmC2X/Nyuh/bQtM="
   on:
