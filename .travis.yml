@@ -28,4 +28,5 @@ deploy:
     repo: emigue/django-health-check-plus
     branch: master
 after_failure:
+  - ls -la
   - cat $HOME/.pypirc
