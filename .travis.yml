@@ -17,16 +17,13 @@ before_script:
 script:
 - tox -e $TOXENV
 deploy:
+  server: https://upload.pypi.org/legacy
   provider: pypi
   user: luispiedra
   password:
-    secure: cF314C0+PQslT9VzJn0+fI+Y+Y4Lx+TrOj39KJI//T5IefqcUHdhtr3k0SZkY6Evewve6jrmgO5GpbjQWM9s8+P5lnFRTF05iMiALamLLc6+Ae9p4jfaWF0uCWJpHTCJgNKG4y7er1dokwFFNhK4nxTwjTHniHLD5P8xXrxX9NS/h3kP2KJl9QHN4ZKoQK/X/40c8iZJV8hmHnktlqYXlLWrHgTBOwdSEc/aPitYkXems9bdxxlbgpmm2MIw9m7hHICgLIBxtuHUXlAt2LsfCEaV/zrecFOQsNCM83ABsGsQMCcNEGduR1PDKOA8fYomc3Kn2pKwSagudiIXW8Y+D0Of/yDQceNdxbeAq8Xh1B2y8ITCHYG99qfZLYs99SI3f3yiYZyCHRz3PQFfoCfos7SZbaGLGzCghQOY+gi9TfaNyH1ZZgPLP+F1MNGTLxaONxr931eOpRDLtlkPnaTjYKMu9iMdSidm+PQ0Y5Zs/uLs5VZDc93DNYm+rj3hseHtUqYDIE3nSx7Wsxy/PJY7J3gYFO84lCnQtnKKpPTTAPuZ+iwkvbkQSK1GhJrwbGmT5VqLpM2pCfgUuW15ro74eO2OmuayF9lwm/lZADzSAGHUsMuJsWxyF+ThKYAy6hK/CwjwxUp+ALucPXzCAC6rv9Ye+qrOx8kRlrJZ3wK848I=
-  skip_cleanup: true
+    secure: "E775kZosgTqpcPZv5LVRqTfs5duQ9miL9/Zh5GNkv2/VME3UF85QrhX/Ka7aoT8ll3MSw+dL40PcUiE0BVNNx0ZeW9yzHbhP49pEYeYNgC/7tObIAEFDI6MFIWr9zDfugx+XZvQht/ZMYoUsgvnObB5d5Qs2911kd3FIu2a8lGBcRxg63LBanVmS9fYN5meOlBuBLrfWgnleLZxc7WFex1N9Y0N6fbe8ssep7WEI7Br4s30IlSkjYBUv4IFbOtAyhGCzIAD72viA3v4HF4d1OVrM00Z+BsUnsk22gStxe8diod+srR+nwIv2PZAcSh1+pTH8+LCgVGqPgnB2GHXqvGYtGBgnCNr6uySHP4Ouss/j/6QjsjWTKsZYTfanxuB+wvNstdjJSmIYOv7rlpgU6PRXurn/Os8pepWdZKI+LLReBI49uXhB018NreZF1BGcwNSwtY0rmc1mWbh2hVazzQxhOTRiy2ThGQkSMTT05As+ozx3B0JVyPqAdBcsTMS0TvfjLjsIBAqceXRjE0u5GBYnzkRa+r818I0wsGXu6zPyv0M9JpKjQgRufKoHMpWRg6T8QfmIP+y89LIbQCZY5gNlFfqVmrNz5+gfulIa6aXyV/ymEfNT6Vk312kvSRDnuGUkRSvi/ARpSK03qavy+Zv5r/1IMmC2X/Nyuh/bQtM="
   on:
     tags: true
     distributions: sdist bdist_wheel
     repo: emigue/django-health-check-plus
     branch: master
-after_failure:
-  - ls -la
-  - cat $HOME/.pypirc
