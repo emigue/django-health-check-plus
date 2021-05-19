@@ -26,5 +26,5 @@ deploy:
     distributions: sdist bdist_wheel
     repo: emigue/django-health-check-plus
     branch: master
-after_deploy:
+after_failure:
   - cat $HOME/.pypirc
